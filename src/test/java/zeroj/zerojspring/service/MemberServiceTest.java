@@ -71,11 +71,8 @@ class MemberServiceTest {
 //        }
         //try-catch문장 새롭게 바꿔주기
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
-        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.")
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
 
-        //then(검증부)
-        Member findMember = memberService.findOne(saveId).get();
-        assertThat(member.getName()).isEqualTo(findMember.getName());
 
     }
 
