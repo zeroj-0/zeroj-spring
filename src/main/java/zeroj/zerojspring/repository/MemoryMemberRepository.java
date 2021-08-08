@@ -1,9 +1,12 @@
 package zeroj.zerojspring.repository;
 
+import org.springframework.stereotype.Repository;
 import zeroj.zerojspring.domain.Member;
 
 import java.util.*;
 
+// @Repository의 어노테이션을 달아줌으로써 스프링컨테이너에 등록해줌
+@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();

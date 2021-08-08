@@ -1,5 +1,7 @@
-package zeroj.zerojspring;
+package zeroj.zerojspring.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import zeroj.zerojspring.domain.Member;
 import zeroj.zerojspring.repository.MemberRepository;
 import zeroj.zerojspring.repository.MemoryMemberRepository;
@@ -7,6 +9,9 @@ import zeroj.zerojspring.repository.MemoryMemberRepository;
 import java.util.List;
 import java.util.Optional;
 
+// @Service를 해주기 전에는 순수자바코드라 스프링이 알 수 있는 방법이 없음
+// 따라서 @Service의 어노테이션을 달아줌으로써 스프링컨테이너에 MemberService를 등록해줌
+@Service
 public class MemberService {
 
     //memberservicetest에서 사용되는 memberrepsitory와 다른 인스턴스를 가지기 때문에 같은 인스턴스에서 비교를 해야하기 때문에 새롭게 바꿔주어야함
@@ -15,6 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     //생성자 만들어줌. 외부에서 넣어주도록 만들어주는 것임. 내가 인스턴스해서 만드는 것이 아님
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
