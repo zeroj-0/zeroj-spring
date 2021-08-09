@@ -2,7 +2,13 @@ package zeroj.zerojspring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import zeroj.zerojspring.domain.Member;
 import zeroj.zerojspring.service.MemberService;
+
+import java.util.List;
 
 // html을 뿌려주기 위함.
 // controller를 만들어서 memberservice를 통해서 회원가입하고 데이터를 조회할 수 있어야 하는데 -> 의존관계에 있다고 할 수 있음
@@ -26,6 +32,30 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    //자바코드로 직접 스프링 빈 등록하기
+    @GetMapping("/members/new")
+    public String createForm(){
+        //createMemberform으로 이동해주는 역할 -> 리턴하면서 template에서 찾음 -> viewResolver 통해서 html뿌림
+        return "members/createMemberform";
+    }
+
+    @PostMapping("/members/new")
+    public String create(MemberForm form){
+        Member member = new Member();
+        //스프링이 setName을 호출해 값이 들어감 왜냐면 name이 private로 선언되었기 때문에
+        //그래서 getName으로 꺼내줌
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        //회원가입이 끝나면서 홈화면으로 보내주는 것
+        return "redirect:/";
+    }
+
+    @GetMapping("/members")
+    public String list(Model model){
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
+    }
 
 }
