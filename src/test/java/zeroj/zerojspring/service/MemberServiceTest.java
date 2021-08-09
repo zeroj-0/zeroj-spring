@@ -77,6 +77,6 @@ class MemberServiceTest {
     }
 
     @Test
-    void fineOne() {
+    void findOne() {
     }
 }
