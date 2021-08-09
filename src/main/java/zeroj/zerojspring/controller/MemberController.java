@@ -25,4 +25,7 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
+
+    //자바코드로 직접 스프링 빈 등록하기
+
 }
