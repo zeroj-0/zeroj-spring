@@ -2,6 +2,7 @@ package zeroj.zerojspring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import zeroj.zerojspring.domain.Member;
 import zeroj.zerojspring.repository.MemberRepository;
 import zeroj.zerojspring.repository.MemoryMemberRepository;
@@ -12,6 +13,9 @@ import java.util.Optional;
 // @Service를 해주기 전에는 순수자바코드라 스프링이 알 수 있는 방법이 없음
 // 따라서 @Service의 어노테이션을 달아줌으로써 스프링컨테이너에 MemberService를 등록해줌
 @Service
+
+//JPA쓸때 주의할 점 : 항상 transaction이 있어야함(데이터를 저장하고 변경할때 필요)
+@Transactional
 public class MemberService {
 
     //memberservicetest에서 사용되는 memberrepsitory와 다른 인스턴스를 가지기 때문에 같은 인스턴스에서 비교를 해야하기 때문에 새롭게 바꿔주어야함

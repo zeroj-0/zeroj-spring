@@ -1,7 +1,16 @@
 package zeroj.zerojspring.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+//JPA가 관리하는 Entity가 됨
+@Entity
 public class Member {
 
+    //pk mapping
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
