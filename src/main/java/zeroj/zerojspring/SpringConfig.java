@@ -25,25 +25,35 @@ public class SpringConfig {
 //        this.dataSource = dataSource;
 //    }
 
+    /** JPA 구현
     private EntityManager em;
 
     @Autowired
     public SpringConfig(EntityManager em) {
         this.em = em;
     }
+    */
+
+    private final MemberRepository memberRepository;
+
+    @Autowired
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+        @Bean
+    public MemberService memberService(){
+        //생성자로 memberRepository 넣어주어야함
+        // MemberService는 스프링빈에 있는 MemberRepository 엮어주어야 함
+        return new MemberService(memberRepository);
+    }
 
 //    @Bean
-//    public MemberService memberService(){
-//        //생성자로 memberRepository 넣어주어야함
-//        // MemberService는 스프링빈에 있는 MemberRepository 엮어주어야 함
-//        return new MemberService(memberRepository());
+//    public MemberRepository memberRepository() {
+//        //memberRepository의 경우 인터페이스라 구현체인 MemoryMemberRepository 해주어야 함
+////        return new MemoryMemberRepository();
+////        return new JdbcTeplateMemberRepository(dataSource);
+//        //JPA 설정
+////        return  new JpaMemberRepository(em);
 //    }
-
-    @Bean
-    public MemberRepository memberRepository() {
-        //memberRepository의 경우 인터페이스라 구현체인 MemoryMemberRepository 해주어야 함
-//        return new MemoryMemberRepository();
-//        return new JdbcTeplateMemberRepository(dataSource);
-        return  new JpaMemberRepository(em);
-    }
 }
