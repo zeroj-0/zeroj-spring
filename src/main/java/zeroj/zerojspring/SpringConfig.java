@@ -3,6 +3,7 @@ package zeroj.zerojspring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import zeroj.zerojspring.aop.TimeTraceAop;
 import zeroj.zerojspring.repository.JdbcTeplateMemberRepository;
 import zeroj.zerojspring.repository.JpaMemberRepository;
 import zeroj.zerojspring.repository.MemberRepository;
@@ -56,4 +57,9 @@ public class SpringConfig {
 //        //JPA 설정
 ////        return  new JpaMemberRepository(em);
 //    }
+
+    @Bean
+    public TimeTraceAop timeTraceAop() {
+        return new TimeTraceAop();
+    }
 }
